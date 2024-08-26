@@ -1,75 +1,33 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import SplashScreen from './src/pages/SplashScreen';
-import OnboardingScreen from './src/pages/OnboardingScreen';
-import NextOnboardingScreen from './src/pages/NextOnboardingScreen';
-import FinalOnboardingScreen from './src/pages/FinalOnboardingScreen';
-import SignIn from './src/pages/SignIn';
-import SignUp from './src/pages/SignUp';
-import ForgotPassword from './src/pages/ForgotPassword';
-import VerifyOTP from './src/pages/VerifyOTP';
-import VerifyOTPacc from './src/pages/VerifyOTPacc';
-import ResetPassword from './src/pages/ResetPassword';
-const Stack = createStackNavigator();
+import React, { useEffect, useState } from "react";
+import { StatusBar, StyleSheet, View, LogBox } from "react-native";
+import SplashScreen from "./src/pages/splash/SplashScreen";
+import Route from "./src/route/Route";
+
 
 const App = () => {
+ 
+  const [loader, setLoader] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoader(true);
+    }, 3000);
+  }, []);
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen">
-        <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="OnboardingScreen"
-          component={OnboardingScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="NextOnboardingScreen"
-          component={NextOnboardingScreen} // Placeholder component
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="FinalOnboardingScreen"
-          component={FinalOnboardingScreen} // Placeholder component
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignIn} // Placeholder component
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp} // Placeholder component
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword} // Placeholder component
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="VerifyOTP"
-          component={VerifyOTP} // Placeholder component
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="VerifyOTPacc"
-          component={VerifyOTPacc} // Placeholder component
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ResetPassword"
-          component={ResetPassword} // Placeholder component
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
+      {!loader ? <SplashScreen /> : <Route />}
+    
+    </View>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+  },
+});
